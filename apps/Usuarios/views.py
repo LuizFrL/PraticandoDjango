@@ -8,19 +8,20 @@ from apps.Usuarios.models import Profile
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['pass']
-        user = User.objects.filter(username=username)
+        data = {
+            'username': request.POST['username'],
+            'pass': request.POST['pass']
+        }
+        user = User.objects.filter(username=data['username'])
         if user.exists():
-            user_auth = auth.authenticate(request, username=username, password=password)
-            auth.login(request, user_auth)
-            return redirect('portifolio')
+            user_auth = auth.authenticate(request, username=data['username'], password=data['pass'])
+            if user_auth:
+                auth.login(request, user_auth)
+                return redirect('portifolio')
+            messages.error(request, 'Senha incorreta', extra_tags='danger')
+            return render(request, 'usuario/login/login.html', data)
         else:
-            data = {
-                'username': username,
-                'pass': password
-            }
-            messages.error(request, 'Usuário ou senhas incorretos ou não cadastrados.', extra_tags='danger')
+            messages.error(request, 'Usuário incorreto ou não cadastrado.', extra_tags='danger')
             return render(request, 'usuario/login/login.html', data)
     return render(request, 'usuario/login/login.html')
 
@@ -50,3 +51,8 @@ def cadastro(request):
             return redirect('login')
         return render(request, 'usuario/cadastro/cadastro.html', form)
     return render(request, 'usuario/cadastro/cadastro.html')
+
+
+def logout(request):
+    logout(request)
+    return redirect('login')
