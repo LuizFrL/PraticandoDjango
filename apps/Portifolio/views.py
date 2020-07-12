@@ -9,9 +9,9 @@ def portifolio_pessoal(request):
         data = {
             '': ''
         }
-        return render(request, 'usuario/portifolio_pessoal.html', data)
+        return render(request, 'usuario/../../templates/portifolio/portifolio_pessoal.html', data)
     return redirect('cadastro')
 
 
 def preview(request):
-    return render(request, 'model_portifolio.html')
+    return render(request, 'portifolio/model_portifolio.html')

@@ -9,8 +9,6 @@
     <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}"/>
 
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} ">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %} ">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %} ">
@@ -35,38 +33,80 @@
 
 <div class="limiter">
     <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
-            <form class="login100-form validate-form flex-sb flex-w" action="{% url 'login' %}" method="POST">
+        <div class="wrap-login100 p-t-0 p-b-50">
+            <form class="login100-form validate-form flex-sb flex-w" action="{% url 'cadastro' %}" method="POST">
                 {% csrf_token %}
                 {% include 'partials/_alertas.html' %}
 
                 <span class="login100-form-title p-b-51">
-						Login
+						Cadastre-se
 					</span>
 
-                <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
-                    <input class="input100" type="text" name="username" placeholder="Username" value="{{ username }}">
-                    <span class="focus-input100"></span>
-                </div>
-
-
-                <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-                    <input class="input100" type="password" name="pass" placeholder="Password" value="{{ pass }}">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="flex-sb-m w-full p-t-3 p-b-24">
-                    <div>
-                        <a href="#" class="txt1">
-                            Forgot?
-                        </a>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Primeiro nome</label>
+                        <input type="text" class="form-control" id="inputEmail4" name="name1" value="{{ name1.0 }}"
+                               required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Segundo nome</label>
+                        <input type="text" class="form-control" id="inputPassword4" name="name2" value="{{ name2.0 }}"
+                               required>
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputAddress">Email</label>
+                        <input type="email" name="email" class="form-control" id="inputAddress"
+                               placeholder="ex: luiz@gmail.com" value=" {{ email.0 }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Username</label>
+                        <input type="text" class="form-control" id="inputPassword4" name="username"
+                               placeholder="ex: Flavio123" value="{{ username.0 }}" required>
+                    </div>
+                </div>
 
-                <div class="container-login100-form-btn m-t-17">
-                    <button class="login100-form-btn" type="submit">
-                        Login
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password1">Senha</label>
+                        <input type="password" name="password1" class="form-control" id="password1"
+                               value="{{ password1.0 }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password2">Confirmar Senha</label>
+                        <input type="password" class="form-control" id="password2" name="password2"
+                               value="{{ password2.0 }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group row col-md-12">
+                    <label for="inputAddress2">Função</label>
+                    <input type="text" class="form-control" name="funcao" id="inputAddress2"
+                           placeholder="Desenvolvedor Python - Angular" value="{{ funcao.0 }}" required>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">Linkedin</label>
+                        <input type="url" class="form-control" id="inputCity" name="linkedin" value="{{ linkedin.0 }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputState">GitHub</label>
+                        <input type="url" class="form-control" id="inputCity" name="github" value=" {{ github.0 }}">
+                    </div>
+                </div>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="validatedCustomFile" name="foto_perfil"
+                           value="{{ foto_perfil.0 }}">
+                    <label class="custom-file-label" for="validatedCustomFile">Foto de Perfil</label>
+                </div>
+                <div class="container-login100-form-btn m-t-17 disabled">
+                    <button class="login100-form-btn" type="submit" id="cadastro">
+                        Cadastrar-se
                     </button>
                 </div>
             </form>
