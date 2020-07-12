@@ -34,7 +34,8 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-t-0 p-b-50">
-            <form class="login100-form validate-form flex-sb flex-w" action="{% url 'cadastro' %}" method="POST">
+            <form class="login100-form validate-form flex-sb flex-w" action="{% url 'cadastro' %}" method="POST"
+                  enctype="multipart/form-data">
                 {% csrf_token %}
                 {% include 'partials/_alertas.html' %}
 
@@ -100,9 +101,9 @@
                 </div>
 
                 <div class="custom-file">
+                    <label class="custom-file-label" for="file">Foto de Perfil</label>
                     <input type="file" class="custom-file-input" id="validatedCustomFile" name="foto_perfil"
                            value="{{ foto_perfil.0 }}">
-                    <label class="custom-file-label" for="validatedCustomFile">Foto de Perfil</label>
                 </div>
                 <div class="container-login100-form-btn m-t-17 disabled">
                     <button class="login100-form-btn" type="submit" id="cadastro">

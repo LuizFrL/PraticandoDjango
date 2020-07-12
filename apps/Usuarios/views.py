@@ -37,16 +37,16 @@ def cadastro(request):
                 first_name=form['name1'],
                 last_name=form['name2']
             )
+
             perfil = Profile.objects.create(
                 user=user,
                 funcao=form['funcao'],
-                foto_perfil=form['foto_perfil'],
+                foto_perfil=request.FILES['foto_perfil'],
                 linkedin=form['linkedin'],
                 git_hub=form['github']
             )
             user.save()
             perfil.save()
-            print('deu certo aq, redirecionando')
             messages.success(request, 'Usuário cadastrado com sucesso!', 'success')
             return redirect('login')
         return render(request, 'usuario/cadastro/cadastro.html', form)
@@ -54,5 +54,5 @@ def cadastro(request):
 
 
 def logout(request):
-    logout(request)
-    return redirect('login')
+    auth.logout(request)
+    return redirect('preview')
