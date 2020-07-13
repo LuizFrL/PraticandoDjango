@@ -62,9 +62,11 @@
             </div>
             <!-- Portfolio Grid Items-->
             <div class="row">
+                {% for portifolio in portifolios %}
+                    {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio index=forloop.counter %}
+                {% endfor %}
 
-                {% include 'partials/portifolio/portifolio_item.html' %}
-
+                {% include 'partials/portifolio/portifolio_add_new_item.html' %}
             </div>
         </div>
     </section>

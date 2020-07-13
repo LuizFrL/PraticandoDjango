@@ -1,0 +1,32 @@
+<form class="login100-form validate-form flex-sb flex-w" action="{% url 'portifolio' %}"
+      method="POST"
+      enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'partials/_alertas.html' %}
+
+
+    <div class="form-row mb-3">
+        <div class="form-group col-md-5 container">
+            <label for="inputEmail4" class="text-center"><b>Título do Projeto</b></label>
+            <input type="text" class="form-control" id="inputEmail4" name="titulo"
+                   value="{{ name1.0 }}"
+                   required>
+        </div>
+    </div>
+    <div class="custom-file col-md-10 mb-3">
+        <input type="file" class="custom-file-input" name="foto" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="validatedCustomFile">Previda de foto de seu projeto!</label>
+    </div>
+    <div class="form-row mb-3">
+        <div class="form-group col-md-12">
+            <label for="inputAddress"><b>Descrição</b></label>
+            <textarea type="email" name="descricao" class="form-control" rows="4" id="inputAddress"
+                      placeholder="Descricao do seu tranbalho!" required></textarea>
+        </div>
+    </div>
+
+    <button class="btn btn-primary mb-3" type="submit">
+        <i class="fa fa-check-circle mr-1" aria-hidden="true"></i>
+        Criar item
+    </button>
+</form>

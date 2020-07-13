@@ -1,30 +1,16 @@
 {% load static %}
-<style>
-    .parent {
-        width: 332px; /* I took the width from your post and placed it in css */
-        height: 284px;
-    }
-
-    /* This will style any <img> element in .parent div */
-    .parent img {
-        height: 100%;
-        width: 100%;
-    }
-</style>
 <div class="col-md-6 col-lg-4 mb-5">
-    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal{{ index }}">
+    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioAddModal">
         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
             <div class="portfolio-item-caption-content text-center text-white"><i
                     class="fas fa-plus fa-3x"></i></div>
         </div>
-        <div class="">
-            <img class="img-fluid mx-auto d-block" src="{{ portifolio.foto.url }}" alt=""/>
-        </div>
+        <img class="img-fluid container" src="{% static 'assets/img/portfolio/add_icon.jpg' %}" alt="" width="250" height="100"/>
     </div>
 </div>
 
 <!-- Portfolio Modals-->
-<div class="portfolio-modal modal fade" id="portfolioModal{{ index }}" tabindex="-1" role="dialog"
+<div class="portfolio-modal modal fade" id="portfolioAddModal" tabindex="-1" role="dialog"
      aria-labelledby="portfolioModal6Label" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -37,7 +23,7 @@
                         <div class="col-lg-9">
                             <!-- Portfolio Modal - Title-->
                             <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                id="portfolioModal6Label">{{ portifolio.titulo }}</h2>
+                                id="portfolioModal6Label">Adicionar novo Item</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -46,11 +32,9 @@
                             </div>
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5"
-                                 src="{{ portifolio.foto.url }}" alt=""/>
-                            <!-- Portfolio Modal - Text-->
-                            <div class="container">
-                                <p class="text-center" style="word-break: break-word">{{ portifolio.descricao }}</p>
-                            </div>
+                                 src="{% static 'assets/img/portfolio/add_icon.jpg' %}" alt="" width="250"
+                                 height="250"/>
+                            {% include 'partials/portifolio/form/form_port.html' %}
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
                                 Close Window
