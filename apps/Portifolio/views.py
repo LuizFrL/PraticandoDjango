@@ -22,12 +22,20 @@ def create_item(request):
 def portifolio_pessoal(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            create_item(request)
+            if request.POST.get('delete'):
+                try:
+                    portifolio: PortifolioItem = get_object_or_404(PortifolioItem, pk=request.POST.get('delete'))
+                    portifolio.delete()
+                except:
+                    pass
+            else:
+                create_item(request)
+        portifolio_list = PortifolioItem.objects.order_by('-data').filter(user_id=request.user.id)
+        # print([portifolio_list[i:i + 3] for i in range(0, len(portifolio_list), 3)])
         data = {
             'perfil': get_object_or_404(Profile, pk=request.user.id),
-            'portifolios': PortifolioItem.objects.order_by('-data').filter(user_id=request.user.id)
+            'portifolios': portifolio_list
         }
-        print(data)
         return render(request, 'portifolio/portifolio_pessoal.html', data)
     return redirect('cadastro')
 

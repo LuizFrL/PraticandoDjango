@@ -11,8 +11,15 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-p {
+.parent {
+   width: 332px !important; /* I took the width from your post and placed it in css */
+   height: 268px !important;
+}
 
+/* This will style any <img> element in .parent div */
+.parent img {
+   height: 100%;
+   width: 100%;
 }
 
 :root {

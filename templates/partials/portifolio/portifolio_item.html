@@ -1,23 +1,11 @@
 {% load static %}
-<style>
-    .parent {
-        width: 332px; /* I took the width from your post and placed it in css */
-        height: 284px;
-    }
-
-    /* This will style any <img> element in .parent div */
-    .parent img {
-        height: 100%;
-        width: 100%;
-    }
-</style>
 <div class="col-md-6 col-lg-4 mb-5">
     <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal{{ index }}">
         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
             <div class="portfolio-item-caption-content text-center text-white"><i
                     class="fas fa-plus fa-3x"></i></div>
         </div>
-        <div class="">
+        <div class="parent">
             <img class="img-fluid mx-auto d-block" src="{{ portifolio.foto.url }}" alt=""/>
         </div>
     </div>
@@ -51,10 +39,22 @@
                             <div class="container">
                                 <p class="text-center" style="word-break: break-word">{{ portifolio.descricao }}</p>
                             </div>
-                            <button class="btn btn-primary" data-dismiss="modal">
-                                <i class="fas fa-times fa-fw"></i>
-                                Close Window
-                            </button>
+
+                            <div class="row">
+                                <form action="{% url 'portifolio' %}" method="post" class="col-md-7">
+                                    {% csrf_token %}
+                                    <input type="text" value="{{ portifolio.id }}" name="delete" hidden>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Delete Item
+                                    </button>
+                                </form>
+
+                                <button class="btn btn-primary" data-dismiss="modal">
+                                    <i class="fas fa-times fa-fw"></i>
+                                    Close Window
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

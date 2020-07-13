@@ -61,11 +61,19 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Portfolio Grid Items-->
+
+            {#                {% for portifolio_grid in portifolios %}#}
+            {#                    <div class="column">#}
+            {#                        {% for portifolio in portifolio_grid %}#}
+            {#                            {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio index=forloop.counter %}#}
+            {#                        {% endfor %}#}
+            {#                    </div>#}
+            {#                {% endfor %}#}
+
             <div class="row">
                 {% for portifolio in portifolios %}
                     {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio index=forloop.counter %}
                 {% endfor %}
-
                 {% include 'partials/portifolio/portifolio_add_new_item.html' %}
             </div>
         </div>
