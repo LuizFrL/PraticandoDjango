@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.shortcuts import render, redirect
 
+from PraticandoDjango.Functions import SendEmail
 from apps.Portifolio.models import PortifolioItem
 from apps.Usuarios.models import Profile
 
@@ -45,7 +46,5 @@ def preview(request):
 
 
 def contato(request):
-    if request.method == "POST":
-        form = request.POST
-        print(form)
+    SendEmail(request).send_basic_email()
     return redirect('portifolio')

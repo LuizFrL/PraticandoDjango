@@ -1,8 +1,12 @@
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from smtplib import SMTP
 from typing import Dict, Union, Tuple
 
 from django.contrib import messages
 from django.contrib.auth.models import User
+
+from PraticandoDjango.CONSTANTS import EMAIL, PASS_EMAIL
 
 
 class AuthenticationValid(object):
@@ -37,18 +41,22 @@ class SendEmail(object):
     def send_basic_email(self):
         if self.request.method == 'POST':
             form = self.request.POST
-
-            print("Enviando email.")
-            email = 'extremobr001@gmail.com'
-            senha = 'UM2&9D7K'
+            email = EMAIL
+            senha = PASS_EMAIL
             servidor_email = SMTP('smtp.gmail.com:587')
             servidor_email.ehlo()
             servidor_email.starttls()
             servidor_email.login(email, senha)
 
+            to = self.request.user.email
             msg = MIMEMultipart('alternative')
-            msg['Subject'] = f'[Monitoramento de envio de notas fiscais] Controle diário'
-            msg['From'] = email
-            msg['To'] = grupo
-
-            servidor_email.sendmail(email, grupo, form[''])
+            msg['Subject'] = 'Mensagem Praticando Django'
+            msg['From'] = form['email']
+            msg['To'] = to
+            message = f'''<p>{form["name"]}, where you phone is {form["phone"]} and email {form['email']}.
+Is send the fallowing message:
+{form["message"]}
+Tank You and Good Bye!</p>'''
+            msg.attach(MIMEText(message, 'html'))
+            servidor_email.sendmail(email, to, msg.as_string().encode('utf-8'))
+            servidor_email.quit()
