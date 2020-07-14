@@ -1,0 +1,47 @@
+<!-- Contact Section Form-->
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <form id="contactForm" name="sentMessage" action="{% url 'contato' %}" novalidate="novalidate" method="POST"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                    <label for="name">Name</label>
+                    <input class="form-control" id="name" type="text" placeholder="Name" name="name" required="required"
+                           data-validation-required-message="Please enter your name."/>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                    <label>Email Address</label>
+                    <input class="form-control" id="email" type="email" placeholder="Email Address" name="email"
+                           required="required"
+                           data-validation-required-message="Please enter your email address."/>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                    <label for="phone">Phone Number</label>
+                    <input class="form-control" id="phone" type="tel" placeholder="Phone Number"
+                           required="required" name="phone"
+                           data-validation-required-message="Please enter your phone number."/>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Message"
+                              required="required" name="message"
+                              data-validation-required-message="Please enter a message."></textarea>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</div>

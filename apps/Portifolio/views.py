@@ -43,3 +43,9 @@ def portifolio_pessoal(request):
 def preview(request):
     return render(request, 'portifolio/model_portifolio.html')
 
+
+def contato(request):
+    if request.method == "POST":
+        form = request.POST
+        print(form)
+    return redirect('portifolio')

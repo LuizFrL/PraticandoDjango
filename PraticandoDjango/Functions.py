@@ -1,3 +1,4 @@
+from smtplib import SMTP
 from typing import Dict, Union, Tuple
 
 from django.contrib import messages
@@ -27,3 +28,27 @@ class AuthenticationValid(object):
             return False
         messages.error(self.request, 'Campos não podem conter apenas espaços.', 'danger')
         return False
+
+
+class SendEmail(object):
+    def __init__(self, request):
+        self.request = request
+
+    def send_basic_email(self):
+        if self.request.method == 'POST':
+            form = self.request.POST
+
+            print("Enviando email.")
+            email = 'extremobr001@gmail.com'
+            senha = 'UM2&9D7K'
+            servidor_email = SMTP('smtp.gmail.com:587')
+            servidor_email.ehlo()
+            servidor_email.starttls()
+            servidor_email.login(email, senha)
+
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = f'[Monitoramento de envio de notas fiscais] Controle diário'
+            msg['From'] = email
+            msg['To'] = grupo
+
+            servidor_email.sendmail(email, grupo, form[''])
