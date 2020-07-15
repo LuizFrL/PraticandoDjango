@@ -1,8 +1,11 @@
+import os
+
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.shortcuts import render, redirect
 
+from PraticandoDjango import settings
 from PraticandoDjango.Functions import SendEmail
 from apps.Portifolio.models import PortifolioItem
 from apps.Usuarios.models import Profile
@@ -10,7 +13,6 @@ from apps.Usuarios.models import Profile
 
 def create_item(request):
     form = request.POST
-    print(form)
     portifolio_item = PortifolioItem.objects.create(
         user_id=request.user.id,
         titulo=form['titulo'],
@@ -20,12 +22,18 @@ def create_item(request):
     portifolio_item.save()
 
 
+def delete_media(portifolio: PortifolioItem):
+    os.remove(portifolio.foto.path)
+    print('deletado')
+
+
 def portifolio_pessoal(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if request.POST.get('delete'):
                 try:
                     portifolio: PortifolioItem = get_object_or_404(PortifolioItem, pk=request.POST.get('delete'))
+                    delete_media(portifolio)
                     portifolio.delete()
                 except:
                     pass
