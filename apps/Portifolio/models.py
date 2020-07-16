@@ -27,3 +27,8 @@ class PortifolioItem(models.Model):
     foto = models.ImageField(upload_to=upload_to_item, blank=True)
     descricao = models.TextField(max_length=200)
     data = models.DateField(default=datetime.today())
+
+
+class SobreVoce(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    descricao = models.TextField()

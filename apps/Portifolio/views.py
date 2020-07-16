@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 
 from PraticandoDjango import settings
 from PraticandoDjango.Functions import SendEmail
-from apps.Portifolio.models import PortifolioItem
+from apps.Portifolio.models import PortifolioItem, SobreVoce
 from apps.Usuarios.models import Profile
 
 
@@ -40,10 +40,13 @@ def portifolio_pessoal(request):
             else:
                 create_item(request)
         portifolio_list = PortifolioItem.objects.order_by('-data').filter(user_id=request.user.id)
+        sobre_voce_list = SobreVoce.objects.filter(user_id=request.user.id)
+
         # print([portifolio_list[i:i + 3] for i in range(0, len(portifolio_list), 3)])
         data = {
             'perfil': get_object_or_404(Profile, pk=request.user.id),
-            'portifolios': portifolio_list
+            'portifolios': portifolio_list,
+            'sobre_voce': sobre_voce_list
         }
         return render(request, 'portifolio/portifolio_pessoal.html', data)
     return redirect('cadastro')
@@ -55,4 +58,8 @@ def preview(request):
 
 def contato(request):
     SendEmail(request).send_basic_email()
+    return redirect('portifolio')
+
+
+def sobre_voce(request):
     return redirect('portifolio')
