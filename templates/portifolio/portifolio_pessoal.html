@@ -89,18 +89,23 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 {% if sobre_voce.0 %}
-                    <div class="col-lg-4 ml-auto"><p class="lead">{{ sobre_voce.0.descricao }}</p></div>
+                    <div class="col-lg-4"><p
+                            class="lead">{{ sobre_voce.0.descricao }}</p></div>
                 {% else %}
-                    <a href="{% url 'sobre_voce' %}" type="button" class="col-lg-4 ml-auto">Prévia</a>
+                    <button class="col-1  mr-5 btn btn-success" onclick="toggleForm1()">Previa</button>
                 {% endif %}
                 {% if sobre_voce.1 %}
-                    <div class="col-lg-4 ml-auto"><p class="lead">{{ sobre_voce.1.descricao }}</p></div>
+                    <div class="col-lg-4"><p class="lead">{{ sobre_voce.1.descricao }}</p></div>
                 {% else %}
-                    <a href="{% url 'sobre_voce' %}" type="button" class="col-lg-4 ml-auto">Prévia</a>
+                    <button class="col-1  ml-5 btn btn-success" onclick="toggleForm2()">Previa</button>
                 {% endif %}
+            </div>
 
+            <div class="row justify-content-center">
+                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm1'%}
+                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm2'%}
             </div>
             <!-- About Section Content-->
         </div>
@@ -116,7 +121,7 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            {% include 'partials/portifolio/form/form_contact.html' %}
+            {% include 'partials/portifolio/form/form_contact.html'%}
         </div>
     </section>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
@@ -124,5 +129,16 @@
         <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
                 class="fa fa-chevron-up"></i></a>
     </div>
-    <!-- Portfolio Modals-->
+
+    <script>
+        function toggleForm1() {
+            var formularios = document.getElementById("SobreForm1");
+            formularios.classList.toggle("invisible");
+        }
+
+        function toggleForm2() {
+            var formularios = document.getElementById("SobreForm2");
+            formularios.classList.toggle("invisible");
+        }
+    </script>
 {% endblock %}

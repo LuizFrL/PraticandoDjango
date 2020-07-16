@@ -1,11 +1,8 @@
 import os
 
-from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-from django.shortcuts import render, redirect
-
-from PraticandoDjango import settings
+from django.shortcuts import render, redirect, get_object_or_404
 from PraticandoDjango.Functions import SendEmail
 from apps.Portifolio.models import PortifolioItem, SobreVoce
 from apps.Usuarios.models import Profile
@@ -41,8 +38,6 @@ def portifolio_pessoal(request):
                 create_item(request)
         portifolio_list = PortifolioItem.objects.order_by('-data').filter(user_id=request.user.id)
         sobre_voce_list = SobreVoce.objects.filter(user_id=request.user.id)
-
-        # print([portifolio_list[i:i + 3] for i in range(0, len(portifolio_list), 3)])
         data = {
             'perfil': get_object_or_404(Profile, pk=request.user.id),
             'portifolios': portifolio_list,
