@@ -1,6 +1,5 @@
 import os
 
-
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from PraticandoDjango.Functions import SendEmail
@@ -57,4 +56,7 @@ def contato(request):
 
 
 def sobre_voce(request):
+    if request.method == "POST":
+        sobre = request.POST['sobre_voce']
+        SobreVoce.objects.create(descricao=sobre, user=request.user).save()
     return redirect('portifolio')

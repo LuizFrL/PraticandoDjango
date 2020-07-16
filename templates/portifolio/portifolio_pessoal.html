@@ -44,9 +44,8 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0">{{ user.first_name }} {{ user.last_name }}<br>
-                {{ perfil.funcao }}
-            </p>
+            <p class="masthead-subheading font-weight-bold mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+            <p class="masthead-subheading mb-0"> {{ perfil.funcao }} </p>
         </div>
     </header>
     <!-- Portfolio Section-->
@@ -104,8 +103,8 @@
             </div>
 
             <div class="row justify-content-center">
-                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm1'%}
-                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm2'%}
+                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm1' %}
+                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm2' %}
             </div>
             <!-- About Section Content-->
         </div>
@@ -121,7 +120,7 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            {% include 'partials/portifolio/form/form_contact.html'%}
+            {% include 'partials/portifolio/form/form_contact.html' %}
         </div>
     </section>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
