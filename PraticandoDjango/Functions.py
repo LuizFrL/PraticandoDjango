@@ -1,12 +1,10 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP
-from typing import Dict, Union, Tuple
-
 from django.contrib import messages
 from django.contrib.auth.models import User
-
 from PraticandoDjango.CONSTANTS import EMAIL, PASS_EMAIL
+from typing import Dict, Union, Tuple
 
 
 class AuthenticationValid(object):
