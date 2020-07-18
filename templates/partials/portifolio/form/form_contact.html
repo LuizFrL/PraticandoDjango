@@ -4,6 +4,10 @@
         <form id="contactForm" name="sentMessage" action="{% url 'contato' %}" novalidate="novalidate" method="POST"
               enctype="multipart/form-data">
             {% csrf_token %}
+
+            <input type="text" name="email_to" value="{{ email }}" hidden>
+            <input type="text" name="next" value="{{ request.path }}" hidden>
+
             <div class="control-group">
                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                     <label for="name">Name</label>

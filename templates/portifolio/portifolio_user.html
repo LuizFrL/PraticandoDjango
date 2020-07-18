@@ -36,7 +36,7 @@
                      width="150">
             </div>
             <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">{{ user }}</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">{{ usuario.username }}</h1>
             <!-- Icon Divider-->
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
@@ -44,7 +44,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-bold mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+            <p class="masthead-subheading font-weight-bold mb-0">{{ usuario.first_name }} {{ usuario.last_name }}</p>
             <p class="masthead-subheading mb-0"> {{ perfil.funcao }} </p>
         </div>
     </header>
@@ -71,9 +71,8 @@
 
             <div class="row">
                 {% for portifolio in portifolios %}
-                    {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio index=forloop.counter %}
+                    {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio %}
                 {% endfor %}
-                {% include 'partials/portifolio/portifolio_add_new_item.html' %}
             </div>
         </div>
     </section>
@@ -89,23 +88,10 @@
                 <div class="divider-custom-line"></div>
             </div>
             <div class="row justify-content-center">
-                {% if sobre_voce.0 %}
-                    <div class="col-lg-4"><p
-                            class="lead">{{ sobre_voce.0.descricao }}</p></div>
-                {% else %}
-                    <button class="col-1  mr-5 btn btn-success" onclick="toggleForm1()">Previa</button>
-                {% endif %}
-                {% if sobre_voce.1 %}
-                    <div class="col-lg-4"><p class="lead">{{ sobre_voce.1.descricao }}</p></div>
-                {% else %}
-                    <button class="col-1  ml-5 btn btn-success" onclick="toggleForm2()">Previa</button>
-                {% endif %}
+                <div class="col-lg-4"><p class="lead">{{ sobre_voce.0.descricao }}</p></div>
+                <div class="col-lg-4"><p class="lead">{{ sobre_voce.1.descricao }}</p></div>
             </div>
 
-            <div class="row justify-content-center">
-                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm1' %}
-                {% include 'partials/portifolio/form/form_descricao.html'  with id='SobreForm2' %}
-            </div>
             <!-- About Section Content-->
         </div>
     </section>
@@ -120,7 +106,7 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            {% include 'partials/portifolio/form/form_contact.html' %}
+            {% include 'partials/portifolio/form/form_contact.html' with email=usuario.email %}
         </div>
     </section>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
@@ -129,15 +115,5 @@
                 class="fa fa-chevron-up"></i></a>
     </div>
 
-    <script>
-        function toggleForm1() {
-            var formularios = document.getElementById("SobreForm1");
-            formularios.classList.toggle("invisible");
-        }
 
-        function toggleForm2() {
-            var formularios = document.getElementById("SobreForm2");
-            formularios.classList.toggle("invisible");
-        }
-    </script>
 {% endblock %}

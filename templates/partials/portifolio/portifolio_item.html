@@ -41,14 +41,16 @@
                             </div>
 
                             <div class="row">
-                                <form action="{% url 'portifolio' %}" method="post" class="col-md-7">
-                                    {% csrf_token %}
-                                    <input type="text" value="{{ portifolio.id }}" name="delete" hidden>
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-times fa-fw"></i>
-                                        Delete Item
-                                    </button>
-                                </form>
+                                {% if index %}
+                                    <form action="{% url 'portifolio' %}" method="post" class="col-md-7">
+                                        {% csrf_token %}
+                                        <input type="text" value="{{ portifolio.id }}" name="delete" hidden>
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-times fa-fw"></i>
+                                            Delete Item
+                                        </button>
+                                    </form>
+                                {% endif %}
 
                                 <button class="btn btn-primary" data-dismiss="modal">
                                     <i class="fas fa-times fa-fw"></i>

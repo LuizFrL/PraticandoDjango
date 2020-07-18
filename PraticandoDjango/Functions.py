@@ -46,7 +46,11 @@ class SendEmail(object):
             servidor_email.starttls()
             servidor_email.login(email, senha)
 
-            to = self.request.user.email
+            if self.request.user.is_anonymous:
+                to = form['email_to']
+            else:
+                to = self.request.user.email
+
             msg = MIMEMultipart('alternative')
             msg['Subject'] = 'Mensagem Praticando Django'
             msg['From'] = form['email']

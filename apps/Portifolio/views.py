@@ -1,6 +1,8 @@
 import os
 
 # Create your views here.
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from PraticandoDjango.Functions import SendEmail
 from apps.Portifolio.models import PortifolioItem, SobreVoce
@@ -52,7 +54,8 @@ def preview(request):
 
 def contato(request):
     SendEmail(request).send_basic_email()
-    return redirect('portifolio')
+    previous_page = request.POST.get('next', '/')
+    return HttpResponseRedirect(previous_page)
 
 
 def sobre_voce(request):
@@ -60,3 +63,17 @@ def sobre_voce(request):
         sobre = request.POST['sobre_voce']
         SobreVoce.objects.create(descricao=sobre, user=request.user).save()
     return redirect('portifolio')
+
+
+def portifolio_user(request, username):
+    usuario: User = User.objects.filter(username=username).get()
+    perfil: Profile = Profile.objects.filter(user_id=usuario).get()
+    itens: PortifolioItem = PortifolioItem.objects.filter(user_id=usuario)
+    sobre: SobreVoce = SobreVoce.objects.filter(user_id=usuario)
+    data = {
+        'usuario': usuario,
+        'perfil': perfil,
+        'portifolios': itens,
+        'sobre_voce': sobre
+    }
+    return render(request, 'portifolio/portifolio_user.html', data)
