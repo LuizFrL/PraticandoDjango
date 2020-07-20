@@ -40,8 +40,8 @@
                                 <p class="text-center" style="word-break: break-word">{{ portifolio.descricao }}</p>
                             </div>
 
-                            <div class="row">
-                                {% if index %}
+                            {% if index %}
+                                <div class="row">
                                     <form action="{% url 'portifolio' %}" method="post" class="col-md-7">
                                         {% csrf_token %}
                                         <input type="text" value="{{ portifolio.id }}" name="delete" hidden>
@@ -50,13 +50,14 @@
                                             Delete Item
                                         </button>
                                     </form>
-                                {% endif %}
+                                </div>
+                            {% endif %}
 
-                                <button class="btn btn-primary" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
+                            <button class="btn btn-primary" data-dismiss="modal">
+                                <i class="fas fa-times fa-fw"></i>
+                                Close Window
+                            </button>
+
                         </div>
                     </div>
                 </div>
