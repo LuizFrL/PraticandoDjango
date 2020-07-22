@@ -22,7 +22,6 @@
                                                          href="#contact">Contact</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                                                          href="{% url 'logout' %}">Logout</a></li>
-
                 </ul>
             </div>
         </div>
@@ -71,7 +70,7 @@
 
             <div class="row">
                 {% for portifolio in portifolios %}
-                    {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio %}
+                    {% include 'partials/portifolio/portifolio_item.html' with portifolio=portifolio index=forloop.counter delete=False %}
                 {% endfor %}
             </div>
         </div>

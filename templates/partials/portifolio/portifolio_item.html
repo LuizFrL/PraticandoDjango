@@ -40,7 +40,7 @@
                                 <p class="text-center" style="word-break: break-word">{{ portifolio.descricao }}</p>
                             </div>
 
-                            {% if index %}
+                            {% if delete %}
                                 <div class="row">
                                     <form action="{% url 'portifolio' %}" method="post" class="col-md-7">
                                         {% csrf_token %}
