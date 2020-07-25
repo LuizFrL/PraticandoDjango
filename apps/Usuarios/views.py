@@ -56,3 +56,7 @@ def cadastro(request):
 def logout(request):
     auth.logout(request)
     return redirect('preview')
+
+
+def forgot(request):
+    return render(request, '')
