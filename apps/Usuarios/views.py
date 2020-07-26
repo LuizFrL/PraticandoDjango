@@ -59,4 +59,4 @@ def logout(request):
 
 
 def forgot(request):
-    return render(request, '')
+    return render(request, 'usuario/login/forgot.html')
