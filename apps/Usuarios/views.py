@@ -1,8 +1,9 @@
+import django
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from PraticandoDjango.Functions import AuthenticationValid
+from PraticandoDjango.Functions import AuthenticationValid, SendEmail
 from apps.Usuarios.models import Profile
 
 
@@ -59,4 +60,14 @@ def logout(request):
 
 
 def forgot(request):
+    if request.method == 'POST':
+        form = request.POST
+        try:
+            usuario = User.objects.filter(username=form['username']).get()
+            SendEmail(request).send_password(usuario.email, usuario.password)
+            messages.success(request, message='Senha enviada para o email cadastrado com sucesso!', extra_tags='success')
+            return redirect('login')
+        except django.contrib.auth.models.User.DoesNotExist:
+            messages.error(request, message='Usuario não encontrado', extra_tags='danger')
+            return redirect('forgot_password')
     return render(request, 'usuario/login/forgot.html')

@@ -35,17 +35,16 @@ class AuthenticationValid(object):
 class SendEmail(object):
     def __init__(self, request):
         self.request = request
+        self.email = EMAIL
+        self.senha = PASS_EMAIL
+        self.servidor_email = SMTP('smtp.gmail.com:587')
+        self.servidor_email.ehlo()
+        self.servidor_email.starttls()
+        self.servidor_email.login(self.email, self.senha)
 
     def send_basic_email(self):
         if self.request.method == 'POST':
             form = self.request.POST
-            email = EMAIL
-            senha = PASS_EMAIL
-            servidor_email = SMTP('smtp.gmail.com:587')
-            servidor_email.ehlo()
-            servidor_email.starttls()
-            servidor_email.login(email, senha)
-
             if self.request.user.is_anonymous:
                 to = form['email_to']
             else:
@@ -60,5 +59,15 @@ Is send the fallowing message:
 {form["message"]}
 Tank You and Good Bye!</p>'''
             msg.attach(MIMEText(message, 'html'))
-            servidor_email.sendmail(email, to, msg.as_string().encode('utf-8'))
-            servidor_email.quit()
+            self.servidor_email.sendmail(self.email, to, msg.as_string().encode('utf-8'))
+            self.servidor_email.quit()
+
+    def send_password(self, to, password):
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = 'Mensagem Praticando Django'
+        msg['From'] = self.email
+        msg['To'] = to
+        message = f'''<p>The password of account is {password}</p>'''
+        msg.attach(MIMEText(message, 'html'))
+        self.servidor_email.sendmail(self.email, to, msg.as_string().encode('utf-8'))
+        self.servidor_email.quit()
