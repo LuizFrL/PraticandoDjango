@@ -64,7 +64,9 @@ def forgot(request):
         form = request.POST
         try:
             usuario = User.objects.filter(username=form['username']).get()
-            SendEmail(request).send_password(usuario.email, usuario.password)
+            password = User.objects.make_random_password()
+            usuario.set_password(password)
+            SendEmail(request).send_password(usuario.email, password)
             messages.success(request, message='Senha enviada para o email cadastrado com sucesso!', extra_tags='success')
             return redirect('login')
         except django.contrib.auth.models.User.DoesNotExist:
