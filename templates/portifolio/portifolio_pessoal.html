@@ -4,7 +4,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand js-scroll-trigger" href="#portfolio">Start Bootstrap</a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
                     type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive"
@@ -13,12 +13,12 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-            {% include 'partials/portifolio/lists/navbar_url.html' %}
+            {% include 'partials/portifolio/lists/navbar_url.html' with auth=user.is_authenticated%}
             </div>
         </div>
     </nav>
     <!-- Masthead-->
-    <header class="masthead bg-primary text-white text-center">
+    <header class="masthead bg-primary text-white text-center" id="portfolio">
         <div class="container d-flex align-items-center flex-column">
             <div class="mb-2">
                 <img src="{{ perfil.foto_perfil.url }}" alt=""
